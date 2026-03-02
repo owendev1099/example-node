@@ -1,0 +1,19 @@
+name: K6 Performance Test
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  k6_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      - name: Ejecutar prueba en K6 Cloud
+        uses: grafana/k6-action@v0.3.1
+        with:
+          filename: script.js
+          cloud: true
+          token: ${{ secrets.K6_API }}
